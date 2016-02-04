@@ -1,0 +1,49 @@
+
+int posStartX = 100;                       //position de départ X de la lettre
+int posStartY = 100;                       //position de départ X de la lettre
+int count = 0;                            // compteur de clic
+int posX = 0;                            // variable qui stoque la position de x de ta lettre
+int posY = 0;                           // variable qui stoque la position de Y de ta lettre
+
+void setup() {
+  size(800, 800);                      // taille de ton écran
+}
+
+void draw() {
+  int r1 = int (random(0, 800));       // valeur random pour X
+  int r2 = int (random(0, 800));       // valeur random pour Y
+
+  background(0);                       //couleur du fond
+  fill(125);                           //couleur du petit rectangle
+  rect(350, 350, 100, 100);            // petit rectangle 
+  textSize(59);                       // taille du texte
+  fill(255);                          //couleur du texte
+  text("A", posX, posY);              //texte à afficher
+
+  if (keyPressed) {                   // si on appuie sur une touche
+    count ++;                         // on rajoute 1 au compteur ( tu peux écrire count = count+1 aussi)
+  }
+
+  if (count < 2) {                          // si ton compteur est plus petit que 2 (c'est le cas tant que tu n'as pas appuyer sur une touche)
+    posX = posStartX;                       // alors la position de X à ta position X de départ 
+    posY = posStartY;                       // alors la position de Y à ta position Y de départ 
+  }
+
+  if (count > 2 && count <10 ) {       // si ton compteur est plus grand que 2 (c'est le cas quand tu appuie sur une touche)
+    posX = r1;                        // alors la position de X est égale au random 1 (r1)
+    posY = r2;                       // alors la position de Y est égale au random 2 (r2)
+  }
+
+  if ( posX > 350 && posX < 450  && posY > 350 && posY < 550) {    // si le X et le Y de ta lettre rentre dans la surface du carré gris   
+    posX=400;                                                     // alors la position de X est égale au au centre de ton écran
+    posY=400;                                                    // alors la position de Y est égale au au centre de ton écran
+    count = 11;                                                  // ça c'est juste pour ne plus être dans les conditions précédentes 
+  }
+
+  if (keyPressed && count ==11) {  // a partir du moment ou ton compteur est égale à 11 ( c'est à dire que ta lettre est arrété au milieu de ton écran)
+    count=3;                       // on remet le compteur à 3 c'est à dire dans un état où posX et posY sont random
+  }
+
+  print("count");                 // pour afficher la valeurs de ton compteur dans la console
+  println(count);
+} 
